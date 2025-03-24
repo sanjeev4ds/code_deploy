@@ -12,3 +12,4 @@ df = spark.read.format("csv") \
 df_final = df.groupBy("state","city").agg(count_distinct("*").alias("total_customers"))
 
 df_final.write.option("header","true").csv("gs://sapient-sanjeevsaini/output/1MB/customers_final.csv")
+#adding comment to test workflow re-run
