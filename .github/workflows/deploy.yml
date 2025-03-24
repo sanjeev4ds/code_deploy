@@ -1,0 +1,22 @@
+name: Deploy Dataproc Job
+on:
+  push:
+    branches:
+      - main # Or your main branch
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google CLoud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Upload code to GCS
+        run: |
+         gcloud storage cp --recursive . gs://sapient-sanjeevsaini/code/
