@@ -14,5 +14,5 @@ df_final = df.groupBy("state","city").agg(count_distinct("*").alias("total_custo
 df_final.write\
 .option("header","true")\
 .option("mode","overwrite")\
-.csv("gs://sapient-sanjeevsaini/output/1MB/customers_final.csv")
+.csv("gs://sapient-sanjeevsaini/output/1MB/customers_final_new.csv")
 #adding comment to test workflow re-run
