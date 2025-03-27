@@ -1,4 +1,4 @@
-name: Deploy Dataproc Job
+name: Deploy Dataproc Job for Learning Purposes
 on:
   push:
     branches:
@@ -12,38 +12,38 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Authenticate to Google CLoud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+      # - name: Authenticate to Google CLoud
+      #   uses: google-github-actions/auth@v1
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      - name: Upload code to GCS
-        run: |
-         gcloud storage cp --recursive . gs://sapient-sanjeevsaini/code/
+      # - name: Upload code to GCS
+      #   run: |
+      #    gcloud storage cp --recursive . gs://sanjeev-bucket-name-issue/code/
 
-      - name: Create Dataproc cluster
-        run: |
-          gcloud dataproc clusters create cluster-95c1 \
-          --enable-component-gateway \
-          --region us-central1 \
-          --no-address \
-          --master-machine-type n1-standard-2 \
-          --master-boot-disk-size 50 \
-          --num-workers 2 \
-          --worker-machine-type n1-standard-2 \
-          --worker-boot-disk-size 50 \
-          --image-version 2.2-debian12 \
-          --optional-components=JUPYTER \
-          --project practice-final-007
+      # - name: Create Dataproc cluster
+      #   run: |
+      #     gcloud dataproc clusters create cluster-95c1 \
+      #     --enable-component-gateway \
+      #     --region us-central1 \
+      #     --no-address \
+      #     --master-machine-type n1-standard-2 \
+      #     --master-boot-disk-size 50 \
+      #     --num-workers 2 \
+      #     --worker-machine-type n1-standard-2 \
+      #     --worker-boot-disk-size 50 \
+      #     --image-version 2.2-debian12 \
+      #     --optional-components=JUPYTER \
+      #     --project practice-final-007
 
-      - name: Submit job on cluster
-        run: |
-           gcloud dataproc jobs submit pyspark  \
-           --cluster=cluster-95c1 \
-           --region=us-central1 \
-           gs://sapient-sanjeevsaini/code/job_1.py
+      # - name: Submit job on cluster
+      #   run: |
+      #      gcloud dataproc jobs submit pyspark  \
+      #      --cluster=cluster-95c1 \
+      #      --region=us-central1 \
+      #      gs://sanjeev-bucket-name-issue/code/job_1.py
 
-      - name: Deleting cluster
-        run: |
-          gcloud dataproc clusters delete cluster-95c1 \
-          --region=us-central1
+      # - name: Deleting cluster
+      #   run: |
+      #     gcloud dataproc clusters delete cluster-95c1 \
+      #     --region=us-central1
